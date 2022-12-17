@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_app/shared/bloc_observer.dart';
 import 'package:shopping_app/shared/components/constants.dart';
@@ -13,20 +16,12 @@ import 'layout/shop_layout.dart';
 import 'modules/login/shop_login_screen.dart';
 import 'modules/on_boarding/on_boarding_screen.dart';
 
-import 'dart:io';//to solve error when run on  my phone
-class MyHttpOverrides extends HttpOverrides{ //to solve error when run on  my phone
-  @override
-  HttpClient createHttpClient(SecurityContext? context){
-    return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
-  }
-}
-
 
 void main() async
 {
   WidgetsFlutterBinding.ensureInitialized();
-  HttpOverrides.global = MyHttpOverrides();//to solve error when run on  my phone
+  ByteData data = await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');//to solve error when run on  my phone
+  SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());//to solve error when run on  my phone
   await CacheHelper.init();  //lAn ba await ala CacheHelper.init() lazem el main ybka async we lAn el main bka async lazwm adef el method...> WidgetsFlutterBinding.ensureInitialized()
 
   DioHelper.init();
