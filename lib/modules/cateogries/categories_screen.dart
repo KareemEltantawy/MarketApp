@@ -44,7 +44,7 @@ class CategoriesScreen extends StatelessWidget
             width: 20.0,
           ),
           Text(model.name!,
-            style: Theme.of(context).textTheme.bodyText2,),
+            style: Theme.of(context).textTheme.bodyText1,),
           Spacer(),
           Icon(
             Icons.arrow_forward_ios,

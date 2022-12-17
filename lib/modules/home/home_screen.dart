@@ -84,7 +84,8 @@ class HomeScreen extends StatelessWidget {
                       crossAxisCount: 2,
                       crossAxisSpacing: 1.0,// el masafa ben item el gridView ofoky
                       mainAxisSpacing: 1.0, // el masafa ben item el gridView rasy
-                      childAspectRatio: 1 / 1.59, // alard / altol
+                      childAspectRatio: MediaQuery.of(context).size.width/630,
+//                      childAspectRatio: 1 / 1.59, // alard / altol
                       children: List.generate(
                         ShopCubit.get(context).homeModel!.data!.products!.length,
                         (index) => buildGridProduct(ShopCubit.get(context).homeModel!.data!.products![index], context),
