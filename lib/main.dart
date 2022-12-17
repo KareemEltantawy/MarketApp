@@ -13,10 +13,20 @@ import 'layout/shop_layout.dart';
 import 'modules/login/shop_login_screen.dart';
 import 'modules/on_boarding/on_boarding_screen.dart';
 
+import 'dart:io';//to solve error when run on  my phone
+class MyHttpOverrides extends HttpOverrides{ //to solve error when run on  my phone
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+  }
+}
+
 
 void main() async
 {
   WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = MyHttpOverrides();//to solve error when run on  my phone
   await CacheHelper.init();  //lAn ba await ala CacheHelper.init() lazem el main ybka async we lAn el main bka async lazwm adef el method...> WidgetsFlutterBinding.ensureInitialized()
 
   DioHelper.init();
